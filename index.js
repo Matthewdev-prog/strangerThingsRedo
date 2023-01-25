@@ -1,6 +1,8 @@
 //global variables
-let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2QwMWI0MWNkYjEzZTAwMTdjNWJjMzIiLCJ1c2VybmFtZSI6Im1hdHRzIiwiaWF0IjoxNjc0NTgyODQ5fQ.eq7HUlh00O32BqQ-oO2Dp95AeVovXGqfL-ASHHwUSP8'
-let postId = '63d022d7cdb13e0017c5bc33'
+require('dotenv').config()
+
+let token = process.env.TOKEN
+let postId = ''
 //fetch functions
 const registerNewUser = async() => {
     try { 
@@ -80,7 +82,8 @@ const createPost = async() => {
             })
           })
         const result = await response.json()
-        console.log(result.data)
+        console.log('created post',result.data)
+        postId = result.data.post._id
      }catch(error){
         console.log(error)
      }
@@ -157,7 +160,6 @@ const getCurrentUserMessages = async() => {
             },
           })
         const result = await response.json()
-        console.log(result.data.posts)
         console.log(result.data.messages)
      }catch(error){
         console.log(error)
